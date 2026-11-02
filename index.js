@@ -1,40 +1,58 @@
 const fs = require('fs');
 const path = require('path');
 
-const MIME_TYPES = {
-  '.html': 'text/html; charset=UTF-8',
-  '.css': 'text/css; charset=UTF-8',
-  '.js': 'application/javascript; charset=UTF-8',
-  '.json': 'application/json',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon'
-};
+// Pre-load assets into memory so Vercel bundler includes them in the deployment
+let photoBuffer = null;
+try {
+  photoBuffer = fs.readFileSync(path.join(__dirname, 'PHOTO.jpeg'));
+} catch (e) {
+  try {
+    photoBuffer = fs.readFileSync(path.join(__dirname, 'assets', 'PHOTO.jpeg'));
+  } catch (err) {}
+}
 
-// Vercel Serverless Function & Node Handler
+let avatarBuffer = null;
+try {
+  avatarBuffer = fs.readFileSync(path.join(__dirname, 'avatar.jpg'));
+} catch (e) {}
+
+let htmlBuffer = null;
+try {
+  htmlBuffer = fs.readFileSync(path.join(__dirname, 'index.html'));
+} catch (e) {}
+
+// Vercel Serverless Function handler
 module.exports = (req, res) => {
-  let reqPath = decodeURI((req.url || '/').split('?')[0]);
-  if (reqPath === '/' || reqPath === '') {
-    reqPath = '/index.html';
+  const rawUrl = decodeURI((req.url || '/').split('?')[0]);
+  const lowerUrl = rawUrl.toLowerCase();
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Serve photo directly
+  if (lowerUrl.includes('photo.jpeg') || lowerUrl.includes('photo.jpg')) {
+    if (photoBuffer) {
+      res.setHeader('Content-Type', 'image/jpeg');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+      return res.end(photoBuffer);
+    }
   }
 
-  const filePath = path.join(__dirname, reqPath);
-  const ext = path.extname(filePath).toLowerCase();
-
-  try {
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-      res.setHeader('Content-Type', MIME_TYPES[ext] || 'application/octet-stream');
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      return res.end(fs.readFileSync(filePath));
+  // Serve avatar fallback
+  if (lowerUrl.includes('avatar.jpg')) {
+    if (avatarBuffer) {
+      res.setHeader('Content-Type', 'image/jpeg');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+      return res.end(avatarBuffer);
     }
-  } catch (err) {}
+  }
 
-  // Fallback to index.html
-  const indexPath = path.join(__dirname, 'index.html');
+  // Always serve index.html for all page routes
   res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-  res.end(fs.readFileSync(indexPath));
+  if (htmlBuffer) {
+    return res.end(htmlBuffer);
+  } else {
+    return res.end(fs.readFileSync(path.join(__dirname, 'index.html')));
+  }
 };
 
 // Allow running locally: node index.js
@@ -43,6 +61,6 @@ if (require.main === module) {
   const server = http.createServer(module.exports);
   const PORT = process.env.PORT || 3000;
   server.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
   });
 }
