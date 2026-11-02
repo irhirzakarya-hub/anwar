@@ -1,0 +1,20 @@
+{
+  "name": "anouar-iqqi-profile",
+  "version": "1.0.0",
+  "description": "Official Web Profile & Digital Portfolio for Athlete & Coach Anouar Iqqi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "fitness",
+    "coach",
+    "portfolio",
+    "athlete",
+    "anouar-iqqi"
+  ],
+  "author": "Anouar Iqqi",
+  "license": "ISC"
+}
+

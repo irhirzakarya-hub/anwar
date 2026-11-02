@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Anouar Iqqi | أنوار إقي</title>
+  
+  <meta name="description" content="الحسابات الرسمية للكوتش والرياضي أنوار إقي (Anouar Iqqi) - واتساب، إنستغرام، وفيسبوك.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:image" content="PHOTO.jpeg">
+  <link rel="icon" type="image/jpeg" href="PHOTO.jpeg">
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Mobile Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Lighting -->
+  <div class="ambient-bg">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <canvas id="dust-canvas"></canvas>
+
+  <!-- Mobile Card Container -->
+  <main class="mobile-wrapper">
+    
+    <!-- Profile Header (Photo & Name) -->
+    <header class="profile-header">
+      <div class="avatar-container">
+        <div class="avatar-ring-outer"></div>
+        <div class="avatar-ring-border"></div>
+        <div class="avatar-img-box">
+          <img src="PHOTO.jpeg" alt="Anouar Iqqi" class="avatar-img" onerror="this.src='avatar.jpg'">
+        </div>
+        <div class="online-badge" title="متاح الآن">
+          <i class="fas fa-check"></i>
+        </div>
+      </div>
+
+      <!-- Name & Verified Badge -->
+      <h1 class="profile-name">
+        <span>Anouar Iqqi</span>
+        <i class="fas fa-certificate verified-icon" title="حساب موثق"></i>
+      </h1>
+
+      <!-- Subtitle Badge -->
+      <div class="profile-tagline">
+        <i class="fas fa-dumbbell"></i>
+        <span>No Pain No Gain</span>
+      </div>
+    </header>
+
+    <!-- Social Links (WhatsApp, Instagram, Facebook) -->
+    <section class="links-container">
+      
+      <!-- 1. WhatsApp Card -->
+      <a href="https://wa.me/212633323534?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%AE%D9%88%D9%8A%D8%A7%20%D8%A3%D9%86%D9%88%D8%A7%D8%B1%D8%8C%20%D8%AA%D9%88%D8%A7%D8%B5%D9%84%D8%AA%20%D9%85%D8%B9%D9%83%20%D9%85%D9%86%20%D8%AE%D9%84%D8%A7%D9%84%20%D8%A7%D9%84%D8%A8%D8%B1%D9%88%D9%81%D8%A7%D9%8A%D9%84%20%D8%AF%D9%8A%D8%A7%D9%84%D9%83" target="_blank" class="link-card whatsapp">
+        <div class="link-left">
+          <div class="link-icon-box">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="link-text-content">
+            <span class="link-title">واتساب | WhatsApp</span>
+            <span class="link-subtitle">06 33 32 35 34</span>
+          </div>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+      </a>
+
+      <!-- 2. Instagram Card -->
+      <a href="https://www.instagram.com/anouar_iqqi?vrfl=Z3ZyZmcyZjB1cnd6" target="_blank" class="link-card instagram">
+        <div class="link-left">
+          <div class="link-icon-box">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <div class="link-text-content">
+            <span class="link-title">إنستغرام | Instagram</span>
+            <span class="link-subtitle">@anouar_iqqi</span>
+          </div>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+      </a>
+
+      <!-- 3. Facebook Card -->
+      <a href="https://web.facebook.com/Anouar.Iqqi94" target="_blank" class="link-card facebook">
+        <div class="link-left">
+          <div class="link-icon-box">
+            <i class="fab fa-facebook-f"></i>
+          </div>
+          <div class="link-text-content">
+            <span class="link-title">فيسبوك | Facebook</span>
+            <span class="link-subtitle">Anouar.Iqqi94</span>
+          </div>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+      </a>
+
+      <!-- 4. Direct Call Card -->
+      <a href="tel:0633323534" class="link-card phone">
+        <div class="link-left">
+          <div class="link-icon-box">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="link-text-content">
+            <span class="link-title">اتصال هاتفي مباشر</span>
+            <span class="link-subtitle">06 33 32 35 34</span>
+          </div>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+      </a>
+
+      <!-- Quick Action Pills -->
+      <div class="quick-actions">
+        <button class="btn-pill-action" id="btn-copy-num">
+          <i class="fas fa-copy"></i>
+          <span>نسخ الرقم</span>
+        </button>
+
+        <button class="btn-pill-action" id="btn-share-profile">
+          <i class="fas fa-share-nodes"></i>
+          <span>مشاركة البروفايل</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Simple Footer -->
+    <footer class="profile-footer">
+      <div class="footer-copy">© Anouar Iqqi • Morocco 🇲🇦</div>
+    </footer>
+
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-box" class="toast-box"></div>
+
+  <!-- Mobile Interactive Script -->
+  <script src="js/main.js"></script>
+</body>
+</html>
